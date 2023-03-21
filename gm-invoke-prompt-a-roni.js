@@ -132,7 +132,6 @@ const createOpenButton = (callback) => {
 const createModal = () => {
   elModal = document.createElement("div");
   elModal.setAttribute("id", "prompt-a-roni-modal");
-  // elModal.style.backgroundColor = "rgba(0,0,0,0.95)";
   elModal.style.background =
     "linear-gradient(180deg, rgba(48,48,48,1) 0%, rgba(12,12,12,1) 100%)";
   elModal.style.border = "2px outset #0002";
@@ -190,7 +189,6 @@ const populateModal = (el) => {
   elButtonContainer.style.justifyContent = "space-between";
   elButtonContainer.style.alignItems = "center";
   elButtonContainer.style.margin = "0.25em 0";
-  // elButtonContainer.style.marginBottom = "2em";
 
   elButtonContainer.append(createApplyButton());
   elButtonContainer.append(createApplyAndRenderButton());
@@ -219,14 +217,13 @@ const createSeparator = (title) => {
 };
 
 const createStagingAreas = () => {
-  // create positve and engative textarea boxes and clone prompt values
+  // create positive and negative textarea boxes and clone prompt values
   const el = document.createElement("div");
   el.style.display = "flex";
   el.style.flexDirection = "column";
   el.style.justifyContent = "space-between";
   el.style.alignItems = "center";
   el.style.margin = "0.25em 0";
-  // el.style.marginBottom = "2em";
 
   const elPositive = document.createElement("textarea");
   elPositive.setAttribute("id", "prompt-a-roni-positive");
@@ -236,7 +233,6 @@ const createStagingAreas = () => {
   elPositive.style.width = "100%";
   elPositive.style.minHeight = "10em";
   elPositive.style.resize = "vertical";
-  // elPositive.style.height = "100%";
   elPositive.style.lineHeight = "1.5";
   elPositive.style.fontFamily = "monospace";
   elPositive.style.fontSize = "10pt";
