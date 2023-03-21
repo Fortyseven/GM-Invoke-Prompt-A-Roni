@@ -32,13 +32,25 @@ const ART_STYLES = [
 
 const GALLERIES = ["artstation", "cgsociety"];
 
+const CAMERA_ANGLES = [
+  "bird's eye view",
+  "close up",
+  "distant view",
+  "distant",
+  "macro",
+  "medium angle",
+  "ultrawide angle",
+  "ultrawide gopro lens",
+  "wide angle",
+];
+
 const LIGHTING = [
   "volumetric lighting",
   "cinematic lighting",
   "dramatic lighting",
 ];
 
-const MODIFIERS = [
+const MISC = [
   "35mm f1.8",
   "3d render",
   "4k",
@@ -198,10 +210,11 @@ const populateModal = (el) => {
 
   elBody.append(createSeparator("Positives"));
   elBody.append(createDropdown(ARTISTS, "Artists", "", " style"));
-  elBody.append(createDropdown(ART_STYLES, "Styles", "", " style"));
+  elBody.append(createDropdown(CAMERA_ANGLES, "Camera Angles"));
   elBody.append(createDropdown(GALLERIES, "Galleries"));
   elBody.append(createDropdown(LIGHTING, "Lighting"));
-  elBody.append(createDropdown(MODIFIERS, "Misc"));
+  elBody.append(createDropdown(ART_STYLES, "Styles", "", " style"));
+  elBody.append(createDropdown(MISC, "Misc"));
   elBody.append(createSeparator("Negatives"));
   elBody.append(createDropdown(NEGATIVES, "Negatives", "", "", true));
 };
