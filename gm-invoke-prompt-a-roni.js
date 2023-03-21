@@ -1,10 +1,10 @@
 // ==UserScript==
-// @name		InvokeUI Prompt-a-roni
+// @name      InvokeUI Prompt-a-roni
 // @version		1
-// @grant		none
+// @grant     none
 // @require		https://unpkg.com/react-trigger-change/dist/react-trigger-change.js
 // @match 		*://127.0.0.1/
-// @run-at      document-idle
+// @run-at    document-idle
 // ==/UserScript==
 
 const BOOT_TIMEOUT_MS = 1500;
