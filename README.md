@@ -8,6 +8,10 @@ Prompt-a-Roni is a [Greasemonkey](https://addons.mozilla.org/en-US/firefox/addon
 - It has been tested on Firefox, but should work fine anywhere Greasemonkey is supported.
 - Future updates to InvokeAI may break this script, but currently works as of the 3.x `main` branch.
 
+## Installation
+
+This is left as an exercise for the reader.
+
 ## What's it look like?
 
 <img src="./docs/screenshot.png" width=320px/>
