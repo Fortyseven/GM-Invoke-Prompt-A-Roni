@@ -19,3 +19,7 @@ This is left as an exercise for the reader.
 ## Current Plans
 
 - [ ] User snippets stored to localstorage
+
+## Why did you name it this?
+
+Literally the first thing that popped into my head. And I was hungry, probably.
