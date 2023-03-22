@@ -395,6 +395,8 @@ const togglePanel = () => {
     // disable the prompt
     elPrompt.disabled = true;
     elPromptNegative.disabled = true;
+
+    elPromptStaging.focus();
   } else {
     elPrompt.disabled = false;
     elPromptNegative.disabled = false;
