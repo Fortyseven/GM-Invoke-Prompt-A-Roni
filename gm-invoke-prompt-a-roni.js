@@ -18,60 +18,59 @@ const ARTISTS = [
 ];
 
 const ART_STYLES = [
+  "3d render",
   "dreamworks",
   "expressionist",
   "forced perspective",
   "harlem renaissance",
   "impressionist",
+  "octane render",
   "pixar",
   "realist",
   "surrealist",
   "vector art",
+  "unreal engine",
   "watercolor",
 ];
 
 const GALLERIES = ["artstation", "cgsociety"];
 
-const CAMERA_ANGLES = [
+const CAMERA_ATTR = [
+  "35mm f1.8",
+  "analog photo",
   "bird's eye view",
   "close up",
   "distant view",
-  "distant",
+  "film grain",
+  "hasselblad",
+  "kodak ektachrome e100",
+  "kodak portra 800",
   "macro",
   "medium angle",
-  "ultrawide angle",
+  "motion blur",
+  "shallow depth of field",
+  "tiny planet",
   "ultrawide gopro lens",
   "wide angle",
 ];
 
 const LIGHTING = [
-  "volumetric lighting",
   "cinematic lighting",
   "dramatic lighting",
+  "volumetric lighting",
 ];
 
 const MISC = [
-  "35mm f1.8",
-  "3d render",
   "4k",
   "8k",
-  "analog photo",
   "epic",
   "eye contact",
-  "film grain",
-  "hasselblad",
   "hd",
   "highly detailed",
   "intricate detail",
-  "kodak ektachrome e100",
-  "kodak portra 800",
-  "motion blur",
   "movie frame",
-  "octane render",
-  "photo realistic",
-  "shallow depth of field",
+  "photorealistic",
   "skin pores",
-  "unreal engine",
   "vibrant color",
 ];
 
@@ -94,6 +93,145 @@ const NEGATIVES = [
   "weird",
 ];
 
+const ACTORS = [
+  "Al Pacino",
+  "Anthony Hopkins",
+  "Brad Pitt",
+  "Bruce Willis",
+  "Burt Lancaster",
+  "Cary Grant",
+  "Chris Evans",
+  "Chris Hemsworth",
+  "Chris Pratt",
+  "Clark Gable",
+  "Clint Eastwood",
+  "Denzel Washington",
+  "Dustin Hoffman",
+  "Dwayne Johnson",
+  "Eddie Murphy",
+  "Gene Hackman",
+  "George Clooney",
+  "Gregory Peck",
+  "Harrison Ford",
+  "Hugh Jackman",
+  "Humphrey Bogart",
+  "Jack Nicholson",
+  "Jackie Chan",
+  "James Cagney",
+  "James Dean",
+  "Jim Carrey",
+  "Joe Don Baker",
+  "John Travolta",
+  "Johnny Depp",
+  "Keanu Reeves",
+  "Kevin Costner",
+  "Laurence Olivier",
+  "Leonardo DiCaprio",
+  "Liam Neeson",
+  "Mark Wahlberg",
+  "Marlon Brando",
+  "Matt Damon",
+  "Mel Gibson",
+  "Michael Douglas",
+  "Morgan Freeman",
+  "Paul Newman",
+  "Paul Rudd",
+  "Peter O'Toole",
+  "Philip Seymour Hoffman",
+  "Robert De Niro",
+  "Robert Downey Jr.",
+  "Robert Duvall",
+  "Robert Redford",
+  "Robin Williams",
+  "Russell Crowe",
+  "Ryan Reynolds",
+  "Samuel L. Jackson",
+  "Sean Connery",
+  "Sidney Poitier",
+  "Spencer Tracy",
+  "Steve McQueen",
+  "Tom Cruise",
+  "Tom Hanks",
+  "Vin Diesel",
+  "Will Smith",
+];
+
+const ACTRESSES = [
+  "Amanda Peet",
+  "Amanda Plummer",
+  "Amanda Seyfried",
+  "Amy Adams",
+  "Amy Poehler",
+  "Angelina Jolie",
+  "Anne Hathaway",
+  "Audrey Hepburn",
+  "Ava Gardner",
+  "Barbra Streisand",
+  "Bette Davis",
+  "Cameron Diaz",
+  "Cate Blanchett",
+  "Charlize Theron",
+  "Elizabeth Taylor",
+  "Emma Stone",
+  "Emma Watson",
+  "Frances McDormand",
+  "Ginger Rogers",
+  "Glenn Close",
+  "Grace Kelly",
+  "Greta Garbo",
+  "Helen Mirren",
+  "Ingrid Bergman",
+  "Jane Fonda",
+  "Jennifer Aniston",
+  "Jennifer Lawrence",
+  "Joan Crawford",
+  "Judi Dench",
+  "Judy Garland",
+  "Julia Roberts",
+  "Julianne Moore",
+  "Kate Winslet",
+  "Katherine Hepburn",
+  "Keira Knightley",
+  "Kirsten Dunst",
+  "Kylie Minogue",
+  "Lauren Bacall",
+  "Lena Headey",
+  "Linda Cardellini",
+  "Liza Minnelli",
+  "Lupita Nyong'o",
+  "Marilyn Monroe",
+  "Marlene Dietrich",
+  "Megan Fox",
+  "Meryl Streep",
+  "Michelle Pfeiffer",
+  "Milla Jovovich",
+  "Natalie Dormer",
+  "Natalie Portman",
+  "Nicole Kidman",
+  "Olivia Colman",
+  "Olivia Munn",
+  "Olivia Wilde",
+  "Penelope Cruz",
+  "Reese Witherspoon",
+  "Renee Zellweger",
+  "Rita Hayworth",
+  "Sally Field",
+  "Salma Hayek",
+  "Sandra Bullock",
+  "Scarlett Johansson",
+  "Sharon Stone",
+  "Shirley MacLaine",
+  "Sigourney Weaver",
+  "Sofia Vergara",
+  "Sophia Loren",
+  "Susan Sarandon",
+  "Tilda Swinton",
+  "Uma Thurman",
+  "Viola Davis",
+  "Vivien Leigh",
+  "Zoe Saldana",
+];
+
 // the ui isn't available immediately, we we'll wait a bit... adjust to taste
 if (window.location.port == 9090) {
   console.log(
@@ -113,6 +251,7 @@ let elPromptNegativeStaging = null;
 let elOpenButton = null;
 let elModal = null;
 
+/* ----------------------------------------------------------------------------*/
 function boot() {
   // FIXME: this will not work if the prompt is not visible (e.g. training, etc)
   elRoot = document.getElementsByTagName("body")[0];
@@ -127,6 +266,7 @@ function boot() {
   elRoot.append(createModal());
 }
 
+/* ----------------------------------------------------------------------------*/
 const createOpenButton = (callback) => {
   const el = document.createElement("button");
   el.setAttribute("id", "prompt-a-roni-button");
@@ -141,6 +281,7 @@ const createOpenButton = (callback) => {
   return el;
 };
 
+/* ----------------------------------------------------------------------------*/
 const createModal = () => {
   elModal = document.createElement("div");
   elModal.setAttribute("id", "prompt-a-roni-modal");
@@ -152,7 +293,7 @@ const createModal = () => {
   elModal.style.display = "none";
   elModal.style.padding = "0.5rem";
   elModal.style.position = "absolute";
-  elModal.style.width = "512px";
+  elModal.style.minWidth = "512px";
   elModal.style.zIndex = 999;
 
   // set style so it's to the right of the elOpenButton
@@ -165,6 +306,7 @@ const createModal = () => {
   return elModal;
 };
 
+/* ----------------------------------------------------------------------------*/
 const togglePanel = () => {
   isPanelOpen = !isPanelOpen;
   elModal.style.display = isPanelOpen ? "block" : "none";
@@ -182,6 +324,7 @@ const togglePanel = () => {
   }
 };
 
+/* ----------------------------------------------------------------------------*/
 const populateModal = (el) => {
   el.innerHTML = `
     <div style="display:flex; flex-direction:column; height:100%; padding: 0.25em">
@@ -193,32 +336,55 @@ const populateModal = (el) => {
 
   const elBody = el.querySelector("#modalBody");
 
-  // prompt staging area
-  // create button container side by side
-  const elButtonContainer = document.createElement("div");
-  elButtonContainer.style.display = "flex";
-  elButtonContainer.style.flexDirection = "row";
-  elButtonContainer.style.justifyContent = "space-between";
-  elButtonContainer.style.alignItems = "center";
-  elButtonContainer.style.margin = "0.25em 0";
-
-  elButtonContainer.append(createApplyButton());
-  elButtonContainer.append(createApplyAndRenderButton());
-
-  elBody.append(elButtonContainer);
+  elBody.append(
+    createSplitContainer([createApplyButton(), createApplyAndRenderButton()])
+  );
   elBody.append(createStagingAreas());
 
   elBody.append(createSeparator("Positives"));
-  elBody.append(createDropdown(ARTISTS, "Artists", "", " style"));
-  elBody.append(createDropdown(CAMERA_ANGLES, "Camera Angles"));
-  elBody.append(createDropdown(GALLERIES, "Galleries"));
-  elBody.append(createDropdown(LIGHTING, "Lighting"));
-  elBody.append(createDropdown(ART_STYLES, "Styles", "", " style"));
-  elBody.append(createDropdown(MISC, "Misc"));
+  elBody.append(
+    createSplitContainer([
+      createDropdown(ARTISTS, "", "Artists", "", " style"),
+      createDropdown(GALLERIES, "", " Galleries"),
+    ])
+  );
+  elBody.append(
+    createSplitContainer([
+      createDropdown(ART_STYLES, "", "Styles", "", " style"),
+      createDropdown(CAMERA_ATTR, "", "Camera Stuff"),
+    ])
+  );
+  elBody.append(createDropdown(LIGHTING, "", "Lighting"));
+  elBody.append(createDropdown(MISC, "", " Misc"));
   elBody.append(createSeparator("Negatives"));
-  elBody.append(createDropdown(NEGATIVES, "Negatives", "", "", true));
+  elBody.append(createDropdown(NEGATIVES, "", " Negatives", "", "", true));
+  elBody.append(createSeparator("People"));
+  elBody.append(
+    createSplitContainer([
+      createDropdown(ACTORS, "", "Actors"),
+      createDropdown(ACTRESSES, "", "Actresses"),
+    ])
+  );
 };
 
+/* ----------------------------------------------------------------------------*/
+const createSplitContainer = (children) => {
+  const el = document.createElement("div");
+  el.style.display = "flex";
+  el.style.flexDirection = "row";
+  el.style.justifyContent = "space-between";
+  el.style.alignItems = "center";
+
+  children.forEach((child) => {
+    child.style.gap = "0.5em";
+    child.style.flex = `1 1 ${100 / children.length}%`;
+    el.append(child);
+  });
+
+  return el;
+};
+
+/* ----------------------------------------------------------------------------*/
 const createSeparator = (title) => {
   const el = document.createElement("div");
   el.style.color = "#fff";
@@ -229,6 +395,7 @@ const createSeparator = (title) => {
   return el;
 };
 
+/* ----------------------------------------------------------------------------*/
 const createStagingAreas = () => {
   // create positive and negative textarea boxes and clone prompt values
   const el = document.createElement("div");
@@ -278,8 +445,10 @@ const createStagingAreas = () => {
   return el;
 };
 
+/* ----------------------------------------------------------------------------*/
 const createDropdown = (
   values,
+  faIconName = "", // TODO: for later
   title,
   prepend = "",
   append = "",
@@ -291,18 +460,18 @@ const createDropdown = (
   el.style.fontWeight = "bold";
   el.style.borderRadius = "0.25rem";
   el.style.padding = "0.5em 1em";
-  el.style.margin = "0.25em 0";
+  el.style.margin = "0.25em";
 
   // first select is label
   const option = document.createElement("option");
   option.value = "";
-  option.text = title;
   option.disabled = true;
   option.selected = true;
   option.style.fontWeight = "bold";
+  option.text = title;
   el.appendChild(option);
 
-  // populate with artists
+  // add all values
   values.sort().forEach((value) => {
     const option = document.createElement("option");
     option.value = value;
@@ -333,6 +502,7 @@ const createDropdown = (
   return el;
 };
 
+/* ----------------------------------------------------------------------------*/
 const createApplyButton = (andRender = false) => {
   const el = document.createElement("button");
   el.style.backgroundColor = "#00bbff";
@@ -359,6 +529,7 @@ const createApplyButton = (andRender = false) => {
   return el;
 };
 
+/* ----------------------------------------------------------------------------*/
 const createApplyAndRenderButton = () => {
   return createApplyButton(true);
 };
