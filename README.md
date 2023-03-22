@@ -12,6 +12,8 @@ Prompt-a-Roni is a [Greasemonkey](https://addons.mozilla.org/en-US/firefox/addon
 
 This is left as an exercise for the reader.
 
+**The current compiled script is in `dist/build.js`.**
+
 ## What's it look like?
 
 <img src="./docs/screenshot.png" width=320px/>
