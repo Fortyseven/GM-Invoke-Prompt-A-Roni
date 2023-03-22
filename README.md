@@ -19,6 +19,11 @@ This is left as an exercise for the reader.
 ## Current Plans
 
 - [ ] User snippets stored to localstorage
+- [ ] Add syntax expansions
+  - [ ] random selections (e.g. [a|b|c])
+  - [ ] random colors (e.g. $COLOR)
+- [ ] Add clipboard copy that combines positive and negative prompts in one step
+- [ ] Strength incrementor? (automate + generate bumping a prompt fragment up in strength, e.g. "(word)1.0 -> word(1.1) -> etc", while auto-rendering at each interval")
 
 ## Why did you name it this?
 
