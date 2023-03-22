@@ -362,6 +362,13 @@ const createModal = () => {
   elModal.style.minWidth = "512px";
   elModal.style.zIndex = 999;
 
+  elModal.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") {
+      e.stopPropagation();
+      togglePanel();
+    }
+  });
+
   // set style so it's to the right of the elOpenButton
   elModal.style.left = `${
     elOpenButton.offsetLeft + elOpenButton.offsetWidth + 10
