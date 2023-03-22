@@ -305,6 +305,8 @@ if (window.location.port == 9090) {
 }
 
 let isPanelOpen = false;
+let oldPrompt = null;
+let oldPromptNegative = null;
 
 let elRoot = null;
 
@@ -377,8 +379,12 @@ const togglePanel = () => {
 
   // copy the prompt to the staging area
   if (isPanelOpen) {
+    oldPrompt = elPrompt.value;
+    oldPromptNegative = elPromptNegative.value;
+
     elPromptStaging.value = elPrompt.value;
     elPromptNegativeStaging.value = elPromptNegative.value;
+
     // disable the prompt
     elPrompt.disabled = true;
     elPromptNegative.disabled = true;
@@ -401,7 +407,11 @@ const populateModal = (el) => {
   const elBody = el.querySelector("#modalBody");
 
   elBody.append(
-    createSplitContainer([createApplyButton(), createApplyAndRenderButton()])
+    createSplitContainer([
+      createApplyButton(),
+      createRenderButton(),
+      createResetButton(),
+    ])
   );
   elBody.append(createStagingAreas());
 
@@ -594,6 +604,54 @@ const createApplyButton = (andRender = false) => {
 };
 
 /* ----------------------------------------------------------------------------*/
-const createApplyAndRenderButton = () => {
-  return createApplyButton(true);
+const createRenderButton = (andRender = false) => {
+  const el = document.createElement("button");
+  el.style.backgroundColor = "var(--accent-color)";
+  el.style.color = "var(--text-color)";
+  el.style.fontWeight = "bold";
+  el.style.borderRadius = "0.25rem";
+  el.style.padding = "0.5em 1em";
+  el.style.margin = "0.25em";
+  el.style.marginLeft = andRender ? "1em" : "";
+  el.title = "Render with current prompt";
+
+  el.style.flex = "1 1 50%";
+  el.innerText = "Render";
+
+  el.onclick = () => {
+    elPrompt.value = elPromptStaging.value;
+    elPromptNegative.value = elPromptNegativeStaging.value;
+    reactTriggerChange(elPrompt);
+    reactTriggerChange(elPromptNegative);
+
+    document.querySelector(".invoke-btn").click();
+  };
+  return el;
+};
+
+/* ----------------------------------------------------------------------------*/
+const createResetButton = (andRender = false) => {
+  const el = document.createElement("button");
+  el.style.backgroundColor = "var(--destructive-color)";
+  el.style.color = "var(--text-color)";
+  el.style.fontWeight = "bold";
+  el.style.borderRadius = "0.25rem";
+  el.style.padding = "0.5em 1em";
+  el.style.margin = "0.25em";
+  el.style.marginLeft = andRender ? "1em" : "";
+  el.title = "Reset to original prompt";
+
+  el.style.flex = "1 1 50%";
+  el.innerText = "Reset";
+
+  el.onclick = () => {
+    elPrompt.value = oldPrompt;
+    elPromptStaging.value = oldPrompt;
+    elPromptNegative.value = oldPromptNegative;
+    elPromptNegativeStaging.value = oldPromptNegative;
+
+    reactTriggerChange(elPrompt);
+    reactTriggerChange(elPromptNegative);
+  };
+  return el;
 };
