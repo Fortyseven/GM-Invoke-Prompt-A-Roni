@@ -398,7 +398,7 @@ const togglePanel = () => {
 const populateModal = (el) => {
   el.innerHTML = `
     <div style="display:flex; flex-direction:column; height:100%; padding: 0.25em">
-      <div style="flex:0; text-align: center; font-weight:bold">Prompt-a-Roni</div>
+      <div style="flex:0; text-align: center; font-weight:bold; color:#fff">Prompt-a-Roni</div>
       <div style="flex:auto; display:flex; flex-direction: column;" id="modalBody">
       </div>
     </div>
@@ -492,6 +492,7 @@ const createStagingAreas = () => {
   elPositive.style.fontSize = "10pt";
   elPositive.style.backgroundColor = "rgba(0, 0, 0, 0.46)";
   elPositive.style.border = "2px inset #000";
+  elPositive.style.color = "#fff";
   elPositive.value = elPrompt.value;
 
   el.appendChild(elPositive);
@@ -509,6 +510,7 @@ const createStagingAreas = () => {
   elNegative.style.fontFamily = "monospace";
   elNegative.style.fontSize = "10pt";
   elNegative.style.backgroundColor = "rgba(17, 0, 0, 0.46)";
+  elNegative.style.color = "#fff";
   elNegative.value = elPromptNegative.value;
 
   el.appendChild(elNegative);
@@ -529,8 +531,8 @@ const createDropdown = (
   isNegative = false
 ) => {
   const el = document.createElement("select");
-  el.style.backgroundColor = "#ffbb00";
-  el.style.color = "#000";
+  el.style.backgroundColor = "var(--accent-color)";
+  el.style.color = "var(--text-color)";
   el.style.fontWeight = "bold";
   el.style.borderRadius = "0.25rem";
   el.style.padding = "0.5em 1em";
@@ -579,15 +581,16 @@ const createDropdown = (
 /* ----------------------------------------------------------------------------*/
 const createApplyButton = (andRender = false) => {
   const el = document.createElement("button");
-  el.style.backgroundColor = "#00bbff";
-  el.style.color = "#000";
+  el.style.backgroundColor = "var(--accent-color)";
+  el.style.color = "var(--text-color)";
   el.style.fontWeight = "bold";
   el.style.borderRadius = "0.25rem";
   el.style.padding = "0.5em 1em";
+  el.style.margin = "0.25em";
   el.style.marginLeft = andRender ? "1em" : "";
-
   el.style.flex = "1 1 50%";
   el.innerText = andRender ? "Apply & Render" : "Apply";
+  el.title = "Apply changes to prompt and close panel";
 
   el.onclick = () => {
     elPrompt.value = elPromptStaging.value;
