@@ -23,17 +23,6 @@ def main():
             with open(fname) as infile:
                 outfile.write(infile.read())
 
-    # replace the version number in the concatenated file with a timestamp
-    with open(os.path.join(DIST, 'build.js'), 'r') as infile:
-        data = infile.read()
-        stamp = datetime.datetime.now().isoformat()
-        data = data.replace(
-            '@version XXX',
-            f'@version {stamp}'
-        )
-        with open(os.path.join(DIST, 'build.js'), 'w') as outfile:
-            outfile.write(data)
-
     # check if uglifyjs is installed
     try:
         subprocess.call(['uglifyjs', '-V'])
@@ -45,9 +34,22 @@ def main():
     # minify the concatenated file
     subprocess.call([
         'uglifyjs',
-        '--comments', '"//"',
         '-o', os.path.join(DIST,
                     'build.min.js'), os.path.join(DIST, 'build.js')])
+
+    # prepend gmHeader.js to the minified file
+    with open(os.path.join('gmHeader.js'), 'r') as infile:
+        data = infile.read()
+        stamp = datetime.datetime.now().isoformat()
+        data = data.replace(
+            '@version XXX',
+            f'@version   {stamp}'
+        )
+
+        with open(os.path.join(DIST, 'build.min.js'), 'r') as infile:
+            data += infile.read()
+            with open(os.path.join(DIST, 'build.min.js'), 'w') as outfile:
+                outfile.write(data)
 
 
 if __name__ == '__main__':
